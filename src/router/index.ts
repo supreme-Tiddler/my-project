@@ -1,22 +1,37 @@
 import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
-import Home from '../views/Home.vue'
-
+// 一级路由
+import Layout from '@/Layout/index.vue'
 Vue.use(VueRouter)
-
+// 路由配置规则
 const routes: Array<RouteConfig> = [
   {
-    path: '/',
-    name: 'Home',
-    component: Home
+    path: '/login',
+    name: 'loginIndex',
+    component: () => import(/* webpackChunkName: 'login' */ '@/views/login/index.vue')
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    path: '/',
+    component: Layout,
+    name: 'loginIndex',
+    children: [
+      {
+        // 默认子路由
+        path: '',
+        name: 'home',
+        component: () => import(/* webpackChunkName: 'home' */ '@/views/home/index.vue')
+      },
+      {
+        path: '/role',
+        name: 'role',
+        component: () => import(/* webpackChunkName: 'role' */ '@/views/role/index.vue')
+      },
+      {
+        path: '/menu',
+        name: 'menu',
+        component: () => import(/* webpackChunkName: 'menu' */ '@/views/menu/index.vue')
+      }
+    ]
   }
 ]
 

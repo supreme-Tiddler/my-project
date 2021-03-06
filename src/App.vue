@@ -1,32 +1,50 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
-  </div>
+  <el-container>
+    <el-aside width="200px">
+      <app-aside />
+    </el-aside>
+    <el-container>
+      <el-header>
+        <app-header/>
+      </el-header>
+      <el-main>
+        <router-view />
+      </el-main>
+    </el-container>
+  </el-container>
+  <!-- 子路由页面 -->
+  <!-- <router-view/> -->
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+<script lang="ts">
+import Vue from "vue";
+import AppAside from "./Layout/components/app-aside.vue";
+import AppHeader from "./Layout/components/app-header.vue";
+export default Vue.extend({
+  name: "LayoutIndex",
+  components: {
+    AppAside,
+    AppHeader
+  }
+});
+
+
+</script>
+
+<style lang="scss" scoped>
+.el-container {
+    min-height: 100vh;
+    min-width: 980px;
+}
+.el-aside {
+  background: #d3dce6;
 }
 
-#nav {
-  padding: 30px;
+.el-header {
+  background: #fff;
+}
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+.el-main {
+  background: #e9eef3;
 }
 </style>
